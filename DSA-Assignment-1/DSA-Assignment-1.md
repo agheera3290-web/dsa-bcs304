@@ -2,7 +2,7 @@
 
 Subject: Data Structures and Applications (BCS304) | Semester III | VTU
 
-Covers Module 1 to Module 2.5. All the C programs are in the `programs/` folder. Every program was compiled and run, and the outputs shown here are the real outputs.
+Covers Module 1 to Module 2.5. All the C programs are in the `programs` folder. Every program was compiled and run (including the small examples of array, stack, queue, linked list, tree and graph in Question 1, which are in `programs/q1_structures.c`), and the outputs shown here are the real outputs.
 
 ---
 
@@ -61,11 +61,7 @@ float f = 3.5;
 1. The elements are arranged one after another in a sequence.
 2. Each element has one previous element and one next element (except the first and last).
 3. We can go through all elements in a single run.
-4. Examples:
-   - **Array** : fixed size, same type elements. `int a[5];`
-   - **Stack** : LIFO, insertion and deletion at one end (top).
-   - **Queue** : FIFO, insertion at rear and deletion at front.
-   - **Linked list** : nodes connected using pointers.
+4. Examples: array, stack, queue, linked list.
 
 ```
 Array :  [10][20][30][40]
@@ -74,19 +70,72 @@ Stack :  | 30 | <- top        Queue :  front -> 10 20 30 <- rear
          | 10 |
 ```
 
+**a) Array** : fixed size, elements of the same type, stored in continuous memory. We access an element directly using its index.
+
+```c
+int a[3] = {10, 20, 30};
+printf("%d", a[1]);        /* prints 20 */
+```
+
+**b) Stack** : LIFO (Last In First Out). Insertion and deletion happen at one end only, called the top.
+
+```c
+int st[5], top = -1;
+st[++top] = 10;                     /* push 10 */
+st[++top] = 20;                     /* push 20 */
+printf("%d", st[top--]);            /* pop prints 20 */
+```
+
+**c) Queue** : FIFO (First In First Out). Insertion happens at the rear and deletion happens at the front.
+
+```c
+int q[5], front = 0, rear = -1;
+q[++rear] = 10;                     /* enqueue 10 */
+q[++rear] = 20;                     /* enqueue 20 */
+printf("%d", q[front++]);           /* dequeue prints 10 */
+```
+
+**d) Linked list** : each node stores the data and the address of the next node. The nodes are connected using pointers.
+
+```c
+struct Node { int data; struct Node *next; };
+struct Node *head = malloc(sizeof(struct Node));
+head->data = 10;
+head->next = NULL;                  /* single node list */
+```
+
 #### (ii) Non-linear data structures
 
 1. The elements are not in a sequence. One element can be connected to many elements.
 2. They show a hierarchy or a network.
 3. We cannot go through all elements in a single run.
-4. Examples:
-   - **Tree** : hierarchical, like a family tree or folders in a computer.
-   - **Graph** : a set of nodes connected by edges, like a road map or social network.
+4. Examples: tree, graph.
 
 ```
 Tree :       A              Graph :   A --- B
             / \                       |  \  |
            B   C                      C --- D
+```
+
+**a) Tree** : hierarchical structure. Each node has a value and pointers to its children. The top node is the root. Example: a family tree, folders in a computer.
+
+```c
+struct TNode { int data; struct TNode *left, *right; };
+struct TNode *root = malloc(sizeof(struct TNode));
+root->data = 1;                     /* root node */
+root->left = NULL;
+root->right = NULL;
+```
+
+**b) Graph** : a set of vertices connected by edges. It is stored using an adjacency matrix. Example: a road map, a social network.
+
+```c
+/* 4 vertices, 1 means an edge is present */
+int adj[4][4] = {{0,1,0,1},
+                 {1,0,1,0},
+                 {0,1,0,1},
+                 {1,0,1,0}};
+printf("%d", adj[0][1]);            /* edge between vertex 0 and 1 */
 ```
 
 ### Difference
